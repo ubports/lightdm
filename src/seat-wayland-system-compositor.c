@@ -35,13 +35,6 @@ typedef struct
 G_DEFINE_TYPE_WITH_PRIVATE (SeatWaylandSystemCompositor, seat_wayland_system_compositor, SEAT_TYPE)
 
 static void
-seat_wayland_system_compositor_setup (Seat *seat)
-{
-    seat_set_supports_multi_session (seat, TRUE);
-    SEAT_CLASS (seat_wayland_system_compositor_parent_class)->setup (seat);
-}
-
-static void
 check_stopped (SeatWaylandSystemCompositor *seat)
 {
     SeatWaylandSystemCompositorPrivate *priv = seat_wayland_system_compositor_get_instance_private (seat);
@@ -279,7 +272,6 @@ seat_wayland_system_compositor_class_init (SeatWaylandSystemCompositorClass *kla
     SeatClass *seat_class = SEAT_CLASS (klass);
 
     object_class->finalize = seat_wayland_system_compositor_finalize;
-    seat_class->setup = seat_wayland_system_compositor_setup;
     seat_class->start = seat_wayland_system_compositor_start;
     seat_class->create_display_server = seat_wayland_system_compositor_create_display_server;
     seat_class->display_server_is_used = seat_wayland_system_compositor_display_server_is_used;
